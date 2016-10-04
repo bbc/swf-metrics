@@ -1,0 +1,27 @@
+{
+  "name": "swf-metrics",
+  "version": "1.0.0",
+  "description": "Introspective metrics and breakdowns of pending and finished AWS Simple Workflow executions.",
+  "main": "index.js",
+  "bin": "bin/swf-metrics",
+  "scripts": {
+    "test": "tape test/*.js"
+  },
+  "engine": {
+    "node": ">=6"
+  },
+  "keywords": [
+    "aws",
+    "swf"
+  ],
+  "author": "Thomas Parisot (https://oncletom.io)",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "aws-sdk": "^2.6.6",
+    "each-async": "^1.1.1",
+    "moment": "^2.15.1"
+  },
+  "devDependencies": {
+    "tape": "^4.6.2"
+  }
+}
