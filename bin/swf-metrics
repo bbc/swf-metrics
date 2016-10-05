@@ -3,6 +3,6 @@
 const api = require('..');
 
 api
-  .getPendingActivities()
-  .then(data => console.log(data))
+  .getFailedWorkflowsActivities({ domain: 'ExampleFreebird' })
+  .then(data => console.log(JSON.stringify(data, null, 2)))
   .catch(err => console.error(err));
