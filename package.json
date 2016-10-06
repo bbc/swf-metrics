@@ -18,7 +18,9 @@
   "license": "Apache-2.0",
   "dependencies": {
     "aws-sdk": "^2.6.6",
+    "cli-table": "^0.3.1",
     "each-async": "^1.1.1",
+    "group-array": "^0.3.1",
     "moment": "^2.15.1",
     "simple-rate-limiter": "^0.2.3"
   },
