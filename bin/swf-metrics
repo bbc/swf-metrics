@@ -1,33 +1,53 @@
 #!/usr/bin/env node
-
 const api = require('..');
-const Table = require('cli-table');
+const chalk = require('chalk');
+const fs = require('fs')
+const table = require('table').default;
 const consolidate = require('../lib/activity/consolidate.js');
+const { report, reasons } = require('../lib/reports/failed-executions.js');
 
 api
   .getFailedWorkflowsActivities({ domain: 'ExampleFreebird' })
   .then(data => consolidate(data))
   .then(data => {
-    const grandTotal = Object.keys(data).reduce((count, key) => {
-      return count + data[key].filter(d => d.status === "Failed").length;
-    }, 0);
+    const { activities } = report(data);
 
-    const t = new Table({
-      head: ['Activity', '#', '# errors', '% errors'],
-    });
+    const output = table(activities.map(activity => [
+      `${chalk.red(activity.name)} ${activity.version}`,
+      activity.totalCount,
+      activity.failedCount,
+      `${chalk.white.bold(activity.failedRatio)}%`,
+      activity.failedUniqueReasonsCount,
+    ]));
 
-    Object.keys(data).forEach(key => {
-      const d = data[key];
-      const failed = d.filter(d => d.status === "Failed");
+    console.log(output);
 
-      t.push([
-        key,
-        d.length,
-        failed.length,
-        (failed.length / grandTotal * 100).toFixed(2),
-      ]);
-    });
+    return data;
+  })
+  .then(data => {
+    const tableConfig = {
+      columns: {
+        0: {
+          width: 60,
+          truncate: 1300
+        },
+        2: {
+          width: 36,
+          truncate: 36 * 10
+        }
+      }
+    };
 
-    console.log(t.toString());
+    const output = table(reasons(data).map(reason => {
+      const { activity } = reason;
+
+      return [
+        `${chalk.red(activity.name)} ${activity.version} ${chalk.dim(reason.label)}`,
+        `${chalk.white.bold(reason.totalCount)}`,
+        `${chalk.dim(reason.executionIds.join(''))}`
+      ];
+    }), tableConfig);
+
+    console.log(output);
   })
   .catch(err => console.error(err));

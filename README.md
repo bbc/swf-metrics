@@ -11,3 +11,5 @@ swf-metrics failed
 ```
 
 ![](screenshot-errors.png)
+
+![](screenshot-errors-breakdown.png)
