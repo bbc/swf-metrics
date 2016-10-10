@@ -13,6 +13,7 @@ test('workflow/history#consolidate', t => {
   const EXPECTED_EXECUTION = Object.assign({}, execution, {
     startedAt: '2016-10-04T11:46:51.301Z',
     completedAt: '',
+    stdin: '13002810:http://g1.globo.com/sp/bauru-marilia/noticia/2016/10/homem-morre-atropelado-por-caminhao-em-rodovia-de-bauru.html'
   });
 
   const EXPECTED_ACTIVITY = {
