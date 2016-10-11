@@ -1,53 +1,36 @@
 #!/usr/bin/env node
-const api = require('..');
-const chalk = require('chalk');
-const fs = require('fs')
-const table = require('table').default;
-const consolidate = require('../lib/activity/consolidate.js');
-const { report, reasons } = require('../lib/reports/failed-executions.js');
+const { join } = require('path');
+const yargs = require('yargs');
 
-api
-  .getFailedWorkflowsActivities({ domain: 'ExampleFreebird' })
-  .then(data => consolidate(data))
-  .then(data => {
-    const { activities } = report(data);
-
-    const output = table(activities.map(activity => [
-      `${chalk.red(activity.name)} ${activity.version}`,
-      activity.totalCount,
-      activity.failedCount,
-      `${chalk.white.bold(activity.failedRatio)}%`,
-      activity.failedUniqueReasonsCount,
-    ]));
-
-    console.log(output);
-
-    return data;
+yargs
+  .usage('$0 <command> --domain <domain> [options]')
+  .env('SWF_METRICS')
+  .option('domain', {
+    type: 'string',
+    demand: true,
+    describe: 'SWF domain to get metrics from',
   })
-  .then(data => {
-    const tableConfig = {
-      columns: {
-        0: {
-          width: 60,
-          truncate: 1300
-        },
-        2: {
-          width: 36,
-          truncate: 36 * 10
-        }
-      }
-    };
-
-    const output = table(reasons(data).map(reason => {
-      const { activity } = reason;
-
-      return [
-        `${chalk.red(activity.name)} ${activity.version} ${chalk.dim(reason.label)}`,
-        `${chalk.white.bold(reason.totalCount)}`,
-        `${chalk.dim(reason.executionIds.join(''))}`
-      ];
-    }), tableConfig);
-
-    console.log(output);
+  .option('for', {
+    type: 'string',
+    describe: 'Duration of time of data to retrieve since the value of --since. Eg: 6hours, 1day, etc.',
+    default: [1, 'hour'],
   })
-  .catch(err => console.error(err));
+  .option('since', {
+    type: 'string',
+    describe: 'Position in time from which we start retrieving the history of data.',
+    default: new Date,
+  })
+  .coerce({
+    since: input => new Date(input).toISOString(),
+    for: input => {
+      const [, digit, unit] = input.match(/(\d+)[\W\s]*([a-z]+)/i);
+      return [digit, unit];
+    }
+  })
+  .command('failed [--no-breakdown]', 'Display metrics about failed workflows.')
+  .commandDir(join(__dirname, '..', 'lib', 'cli'))
+  .global(['domain', 'for', 'since'])
+  .help()
+  .version()
+  .strict()
+  .argv;
