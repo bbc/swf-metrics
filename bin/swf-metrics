@@ -6,16 +6,30 @@ yargs
   .usage('$0 <command> --domain <domain> [options]')
   .env('SWF_METRICS')
   .option('domain', {
+    global: true,
     type: 'string',
     demand: true,
     describe: 'SWF domain to get metrics from',
   })
   .option('for', {
+    global: true,
     type: 'string',
     describe: 'Duration of time of data to retrieve since the value of --since. Eg: 6hours, 1day, etc.',
     default: [1, 'hour'],
   })
+  .option('workflow-id', {
+    global: true,
+    type: 'string',
+    describe: 'Retrieve the metrics only for a given workflow.',
+  })
+  .option('time-threshold', {
+    global: true,
+    type: 'number',
+    describe: 'Minimum time in seconds to consider a value significative enough to be displayed.',
+    default: 1
+  })
   .option('since', {
+    global: true,
     type: 'string',
     describe: 'Position in time from which we start retrieving the history of data.',
     default: new Date,
@@ -28,8 +42,8 @@ yargs
     }
   })
   .command('failed [--no-breakdown]', 'Display metrics about failed workflows.')
+  .command('pending', 'Display metrics about pending workflows.')
   .commandDir(join(__dirname, '..', 'lib', 'cli'))
-  .global(['domain', 'for', 'since'])
   .help()
   .version()
   .strict()
