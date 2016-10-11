@@ -43,6 +43,7 @@ yargs
   })
   .command('failed [--no-breakdown]', 'Display metrics about failed workflows.')
   .command('pending', 'Display metrics about pending workflows.')
+  .command('completed', 'Display metrics about completed workflows.')
   .commandDir(join(__dirname, '..', 'lib', 'cli'))
   .help()
   .version()

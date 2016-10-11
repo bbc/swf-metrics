@@ -2,7 +2,7 @@ const { SWF } = require('aws-sdk');
 const each = require('each-async');
 const limit = require('simple-rate-limiter');
 const { consolidate } = require('./lib/workflow/history.js');
-const { getOpenWorkflows, getFailedWorkflows, getClosedWorkflows } = require('./lib/workflow/get.js');
+const { getOpenWorkflows, getFailedWorkflows, getCompletedWorkflows } = require('./lib/workflow/get.js');
 const { countOpenWorkflows } = require('./lib/workflow/count.js');
 
 const client = new SWF({ region: process.env.AWS_DEFAULT_REGION });
@@ -19,9 +19,9 @@ function getFailedWorkflowsActivities(options) {
     .then(data => getWorkflowsHistory(client, data));
 }
 
-function getClosedWorkflowsActivities(options) {
+function getCompletedWorkflowsActivities(options) {
   return Promise.resolve(client)
-    .then(client => getClosedWorkflows(client, options))
+    .then(client => getCompletedWorkflows(client, options))
     .then(data => getWorkflowsHistory(client, data));
 }
 
@@ -70,7 +70,7 @@ function getWorkflowsHistory (client, data) {
 
 module.exports = {
   getPendingWorkflowsActivities,
-  getClosedWorkflowsActivities,
+  getCompletedWorkflowsActivities,
   getFailedWorkflowsActivities,
   countPendingWorkflowsActivities,
 };
