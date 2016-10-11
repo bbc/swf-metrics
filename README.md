@@ -10,6 +10,7 @@ $ swf-metrics <command> --domain <domain> [options]
 Commands:
   failed [--no-breakdown]  Display metrics about failed workflows.
   pending                  Display metrics about pending workflows.
+  completed                Display metrics about completed workflows.
 
 Options:
   --domain          SWF domain to get metrics from           [string] [required]
@@ -20,7 +21,7 @@ Options:
   --time-threshold  Minimum time in seconds to consider a value significative
                     enough to be displayed.                [number] [default: 1]
   --since           Position in time from which we start retrieving the history
-                    of data.      [string] [default: "2016-10-11T17:44:02.848Z"]
+                    of data.      [string] [default: "2016-10-11T18:33:37.038Z"]
   --help            Show help                                          [boolean]
   --version         Show version number                                [boolean]
 ```
@@ -195,3 +196,14 @@ $ swf-metrics --domain ExampleFreebird pending --workflow-id e1adf3c6-9169-468b-
 ║ MainProtagonist 20160420   │ 0/1/1 │ 0 │ 61.66s. │ -      │ -       ║
 ╚════════════════════════════╧═══════╧═══╧═════════╧════════╧═════════╝
 ```
+
+
+# License
+
+> Copyright 2016 British Broadcasting Corporation
+>
+> Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
+>
+> http://www.apache.org/licenses/LICENSE-2.0
+>
+> Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.

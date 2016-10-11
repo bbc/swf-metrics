@@ -5,7 +5,16 @@
   "main": "index.js",
   "bin": "bin/swf-metrics",
   "scripts": {
-    "test": "nyc tape test/*.js"
+    "lint": "eslint index.js ./lib ./bin",
+    "test": "nyc tape test/*.js",
+    "posttest": "npm run lint"
+  },
+  "bugs": {
+    "url": "https://github.com/bbc/swf-metrics/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bbc/swf-metrics.git"
   },
   "engine": {
     "node": ">=6"
@@ -34,6 +43,7 @@
     "yargs": "^6.0.0"
   },
   "devDependencies": {
+    "eslint": "^3.7.1",
     "nyc": "^8.3.1",
     "tape": "^4.6.2"
   }
