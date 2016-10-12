@@ -11,7 +11,7 @@ yargs
     demand: true,
     describe: 'SWF domain to get metrics from',
   })
-  .option('for', {
+  .option('duration', {
     global: true,
     type: 'string',
     describe: 'Duration of time of data to retrieve since the value of --since. Eg: 6hours, 1day, etc.',
@@ -25,7 +25,7 @@ yargs
   .option('time-threshold', {
     global: true,
     type: 'number',
-    describe: 'Minimum time in seconds to consider a value significative enough to be displayed.',
+    describe: 'Hide time measures which value is below this number of seconds.',
     default: 1
   })
   .option('since', {
@@ -36,7 +36,7 @@ yargs
   })
   .coerce({
     since: input => new Date(input).toISOString(),
-    for: input => {
+    duration: input => {
       const [, digit, unit] = input.match(/(\d+)[\W\s]*([a-z]+)/i);
       return [digit, unit];
     }
