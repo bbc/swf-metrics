@@ -1,63 +1,60 @@
-const { SWF } = require('aws-sdk');
-const each = require('each-async');
-const limit = require('simple-rate-limiter');
+const Batch = require('batch');
 const { consolidate } = require('./lib/workflow/history.js');
 const { getOpenWorkflows, getFailedWorkflows, getCompletedWorkflows } = require('./lib/workflow/get.js');
 const { countOpenWorkflows } = require('./lib/workflow/count.js');
 
-const client = new SWF({ region: process.env.AWS_DEFAULT_REGION });
+// so far, this is a good number for large workflows but maybe it should be adapted based on the number of history to retrieve
+const DEFAULT_CONCURRENCY = 15;
 
-function getPendingWorkflowsActivities(options) {
+function getPendingWorkflowsActivities(client, options) {
   return Promise.resolve(client)
-    .then(client => getOpenWorkflows(client, options))
-    .then(data => getWorkflowsHistory(client, data));
+    .then(() => getOpenWorkflows(client, options))
+    .then(data => getWorkflowsHistory(client, data, options));
 }
 
-function getFailedWorkflowsActivities(options) {
+function getFailedWorkflowsActivities(client, options) {
   return Promise.resolve(client)
-    .then(client => getFailedWorkflows(client, options))
-    .then(data => getWorkflowsHistory(client, data));
+    .then(() => getFailedWorkflows(client, options))
+    .then(data => getWorkflowsHistory(client, data, options));
 }
 
-function getCompletedWorkflowsActivities(options) {
+function getCompletedWorkflowsActivities(client, options) {
   return Promise.resolve(client)
-    .then(client => getCompletedWorkflows(client, options))
-    .then(data => getWorkflowsHistory(client, data));
+    .then(() => getCompletedWorkflows(client, options))
+    .then(data => getWorkflowsHistory(client, data, options));
 }
 
-function countPendingWorkflowsActivities(options) {
+function countPendingWorkflowsActivities(client, options) {
   return Promise.resolve(client)
-    .then(client => countOpenWorkflows(client, options));
+    .then(() => countOpenWorkflows(client, options));
 }
 
-function getWorkflowsHistory (client, data) {
+function getWorkflowsHistory (client, data, options) {
   return new Promise((resolve, reject) => {
-    const DEFAULT_PARAMS = {
-      domain: 'ExampleFreebird',
-    };
-    const apiCall = limit(client.getWorkflowExecutionHistory.bind(client))
-      .evenly()
-      .to(80)
-      .per(1000);
+    const { domain } = options;
+    const b = new Batch();
+    b.concurrency(DEFAULT_CONCURRENCY);
 
-    each(data, (execution, index, next) => {
-      const params = Object.assign({}, DEFAULT_PARAMS, { execution });
+    data.forEach((execution, index) => {
+      b.push(next => {
+        const params = Object.assign({}, { execution }, { domain });
+        client.getWorkflowExecutionHistory(params, (err, history) => {
+          if (err) {
+            return next(err);
+          }
 
-      apiCall(params, (err, history) => {
-        if (err) {
-          return reject(err);
-        }
+          try {
+            data[index] = consolidate(execution, history.events);
+            next();
+          }
+          catch(err) {
+            return next(err);
+          }
+        });
+      });
+    });
 
-        try {
-          data[index] = consolidate(execution, history.events);
-          next();
-        }
-        catch(err) {
-          next(err);
-        }
-      })
-      .on('error', err => next(err));
-    }, err => {
+    b.end(err => {
       if (err) {
         return reject(err);
       }
