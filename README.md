@@ -6,7 +6,7 @@
 
 ## Install locally
 ```
-npm install
+$ npm install
 ```
 
 ## Run with Docker
@@ -17,9 +17,9 @@ Ensure the following environment variables are set:
 * AWS_SECRET_ACCESS_KEY
 
 ```
-docker build -t swf-metrics .
+$ docker build -t swf-metrics .
 
-docker run --rm -it \
+$ docker run --rm -it \
     --name swf-metrics \
     -e AWS_DEFAULT_REGION=$AWS_DEFAULT_REGION \
     -e AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID \
