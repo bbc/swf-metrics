@@ -1,5 +1,6 @@
 FROM bbcrd/node:6.x
 
+USER app
 WORKDIR /app
 
 COPY . /app
