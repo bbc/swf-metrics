@@ -6,5 +6,5 @@ COPY . /app
 
 RUN npm install --production
 
-ENTRYPOINT "/bin/bash"
+ENTRYPOINT ["/app/bin/swf-metrics"]
 
