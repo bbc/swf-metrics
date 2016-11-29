@@ -1,0 +1,12 @@
+language: node_js
+node_js:
+- v6
+- node
+deploy:
+  provider: npm
+  email: irfs@bbc.co.uk
+  api_key:
+    secure: gfqcq4C0fQLmoIfjfCanK+97sZ3x8QtnvyimBsyE9zf/n4N77RN/DtiL/ePGEnCiVReCe4YkpOVDK1+olzjvbYhJHV7C9qa8tiB+3ncegn2IXTsNTetNNVF7Q0df0DgtMLqxWQzjML55YPfD865xXMIwvqOgbQZdXhPBJqifgjVnI4hl2n2oDr9zZkE6WxQu+fXoHDbaA4r6/wX9UfiGDB2J5Xg1CK4wCwJswvRvznrgXy1suW3LxFFmY7d6eSgfyWNiYry252Nyv1xAx2jHKukgCd8chc3rEe1RiJbugB10Z4bAFbOSZX5iPpyTyQ+4tMN7bU6qqK2l0ALUnGxsFX75p8Euh08TtFDydqsVfbHR+0Ni+ZXWlMjtGJ7XXysWRZOc3rwza8l1G5rz2wewq3u5If+P3vIo5R44JA+wFdCS1uchwbz/+7rP7Lm8mClfoNeFcT+snq6RhM9z6UZOH0tEcJK/jxEsu8fg7nKgessnln/cyXQmHteKmwYK1B4Y7Piy0fB3n2wUD2+dFJNiSLPoJ1wjHTpkp+g96veGUYTeY9lyKxsNLV7cBW96YJPrVpeX+f1rW4oC0VqU+MVkYukP0WATjFb4UxrxRCzTgP1HeigOVc/vypAyoqy3dbtDAQArvThCubv/rzEwc2eE6YAJpd1wsohhLVNxX9rkqyA=
+  on:
+    tags: true
+    repo: bbc/swf-metrics
