@@ -1,0 +1,773 @@
+[
+  {
+    "eventTimestamp": "2016-10-04T11:46:51.301Z",
+    "eventType": "WorkflowExecutionStarted",
+    "eventId": 1,
+    "workflowExecutionStartedEventAttributes": {
+      "input": "13002810:http://g1.globo.com/sp/bauru-marilia/noticia/2016/10/homem-morre-atropelado-por-caminhao-em-rodovia-de-bauru.html",
+      "executionStartToCloseTimeout": "259200",
+      "taskStartToCloseTimeout": "30",
+      "childPolicy": "REQUEST_CANCEL",
+      "taskList": {
+        "name": "ExtractMetadata"
+      },
+      "workflowType": {
+        "name": "ExtractMetadata",
+        "version": "20150122"
+      },
+      "parentInitiatedEventId": 0
+    }
+  },
+  {
+    "eventTimestamp": "2016-10-04T11:46:51.301Z",
+    "eventType": "DecisionTaskScheduled",
+    "eventId": 2,
+    "decisionTaskScheduledEventAttributes": {
+      "taskList": {
+        "name": "ExtractMetadata"
+      },
+      "startToCloseTimeout": "30"
+    }
+  },
+  {
+    "eventTimestamp": "2016-10-04T11:53:41.632Z",
+    "eventType": "DecisionTaskStarted",
+    "eventId": 3,
+    "decisionTaskStartedEventAttributes": {
+      "identity": "1b3cebb05884:1",
+      "scheduledEventId": 2
+    }
+  },
+  {
+    "eventTimestamp": "2016-10-04T11:53:41.691Z",
+    "eventType": "DecisionTaskCompleted",
+    "eventId": 4,
+    "decisionTaskCompletedEventAttributes": {
+      "scheduledEventId": 2,
+      "startedEventId": 3
+    }
+  },
+  {
+    "eventTimestamp": "2016-10-04T11:53:41.691Z",
+    "eventType": "ActivityTaskScheduled",
+    "eventId": 5,
+    "activityTaskScheduledEventAttributes": {
+      "activityType": {
+        "name": "RenderHtml",
+        "version": "20150917"
+      },
+      "activityId": "ce4ced6e-649d-4f9a-85e4-2cbaa71f8528",
+      "scheduleToStartTimeout": "NONE",
+      "scheduleToCloseTimeout": "NONE",
+      "startToCloseTimeout": "NONE",
+      "taskList": {
+        "name": "RenderHtml"
+      },
+      "decisionTaskCompletedEventId": 4,
+      "heartbeatTimeout": "NONE"
+    }
+  },
+  {
+    "eventTimestamp": "2016-10-04T11:53:41.710Z",
+    "eventType": "ActivityTaskStarted",
+    "eventId": 6,
+    "activityTaskStartedEventAttributes": {
+      "identity": "efa9db31b6b5:1",
+      "scheduledEventId": 5
+    }
+  },
+  {
+    "eventTimestamp": "2016-10-04T11:53:47.605Z",
+    "eventType": "ActivityTaskCompleted",
+    "eventId": 7,
+    "activityTaskCompletedEventAttributes": {
+      "result": "{\"properties\":[\"http://schema.org/url\",\"http://prototyping.bbc.co.uk/ns#html\"]}",
+      "scheduledEventId": 5,
+      "startedEventId": 6
+    }
+  },
+  {
+    "eventTimestamp": "2016-10-04T11:53:47.605Z",
+    "eventType": "DecisionTaskScheduled",
+    "eventId": 8,
+    "decisionTaskScheduledEventAttributes": {
+      "taskList": {
+        "name": "ExtractMetadata"
+      },
+      "startToCloseTimeout": "30"
+    }
+  },
+  {
+    "eventTimestamp": "2016-10-04T11:56:23.529Z",
+    "eventType": "DecisionTaskStarted",
+    "eventId": 9,
+    "decisionTaskStartedEventAttributes": {
+      "identity": "1b3cebb05884:1",
+      "scheduledEventId": 8
+    }
+  },
+  {
+    "eventTimestamp": "2016-10-04T11:56:23.766Z",
+    "eventType": "DecisionTaskCompleted",
+    "eventId": 10,
+    "decisionTaskCompletedEventAttributes": {
+      "scheduledEventId": 8,
+      "startedEventId": 9
+    }
+  },
+  {
+    "eventTimestamp": "2016-10-04T11:56:23.766Z",
+    "eventType": "ActivityTaskScheduled",
+    "eventId": 11,
+    "activityTaskScheduledEventAttributes": {
+      "activityType": {
+        "name": "BasicMetadata",
+        "version": "20151130"
+      },
+      "activityId": "e09722c5-8dd8-4a3f-aa26-2273cca2dc4a",
+      "scheduleToStartTimeout": "NONE",
+      "scheduleToCloseTimeout": "NONE",
+      "startToCloseTimeout": "NONE",
+      "taskList": {
+        "name": "BasicMetadata"
+      },
+      "decisionTaskCompletedEventId": 10,
+      "heartbeatTimeout": "NONE"
+    }
+  },
+  {
+    "eventTimestamp": "2016-10-04T11:56:23.766Z",
+    "eventType": "ActivityTaskScheduled",
+    "eventId": 12,
+    "activityTaskScheduledEventAttributes": {
+      "activityType": {
+        "name": "ExtractBody",
+        "version": "20141218"
+      },
+      "activityId": "1b0fc141-6ee2-42e8-a30e-857a21ac068e",
+      "scheduleToStartTimeout": "NONE",
+      "scheduleToCloseTimeout": "NONE",
+      "startToCloseTimeout": "NONE",
+      "taskList": {
+        "name": "ExtractBody"
+      },
+      "decisionTaskCompletedEventId": 10,
+      "heartbeatTimeout": "NONE"
+    }
+  },
+  {
+    "eventTimestamp": "2016-10-04T11:56:23.766Z",
+    "eventType": "ActivityTaskScheduled",
+    "eventId": 13,
+    "activityTaskScheduledEventAttributes": {
+      "activityType": {
+        "name": "MobileFriendly",
+        "version": "20150708"
+      },
+      "activityId": "cfb016f9-0b20-47a3-b946-822844513d6b",
+      "scheduleToStartTimeout": "NONE",
+      "scheduleToCloseTimeout": "NONE",
+      "startToCloseTimeout": "NONE",
+      "taskList": {
+        "name": "MobileFriendly"
+      },
+      "decisionTaskCompletedEventId": 10,
+      "heartbeatTimeout": "NONE"
+    }
+  },
+  {
+    "eventTimestamp": "2016-10-04T11:56:23.766Z",
+    "eventType": "ActivityTaskScheduled",
+    "eventId": 14,
+    "activityTaskScheduledEventAttributes": {
+      "activityType": {
+        "name": "Favicons",
+        "version": "20160223"
+      },
+      "activityId": "a3510fb8-467a-4994-9c98-685ae4f7e0d7",
+      "scheduleToStartTimeout": "NONE",
+      "scheduleToCloseTimeout": "NONE",
+      "startToCloseTimeout": "NONE",
+      "taskList": {
+        "name": "Favicons"
+      },
+      "decisionTaskCompletedEventId": 10,
+      "heartbeatTimeout": "NONE"
+    }
+  },
+  {
+    "eventTimestamp": "2016-10-04T11:56:23.766Z",
+    "eventType": "TimerStarted",
+    "eventId": 15,
+    "timerStartedEventAttributes": {
+      "timerId": "4fdb4007-2097-473b-98ea-c47443c75787",
+      "control": "SerializeMetadata",
+      "startToFireTimeout": "20",
+      "decisionTaskCompletedEventId": 10
+    }
+  },
+  {
+    "eventTimestamp": "2016-10-04T11:56:23.813Z",
+    "eventType": "ActivityTaskStarted",
+    "eventId": 16,
+    "activityTaskStartedEventAttributes": {
+      "identity": "ee94f97e60e6:1",
+      "scheduledEventId": 14
+    }
+  },
+  {
+    "eventTimestamp": "2016-10-04T11:56:23.832Z",
+    "eventType": "ActivityTaskStarted",
+    "eventId": 17,
+    "activityTaskStartedEventAttributes": {
+      "identity": "befa6afb8a14:1",
+      "scheduledEventId": 11
+    }
+  },
+  {
+    "eventTimestamp": "2016-10-04T11:56:23.843Z",
+    "eventType": "ActivityTaskStarted",
+    "eventId": 18,
+    "activityTaskStartedEventAttributes": {
+      "identity": "3511b9b45696:1",
+      "scheduledEventId": 13
+    }
+  },
+  {
+    "eventTimestamp": "2016-10-04T11:56:23.882Z",
+    "eventType": "ActivityTaskStarted",
+    "eventId": 19,
+    "activityTaskStartedEventAttributes": {
+      "identity": "51f6aaa98c53:1",
+      "scheduledEventId": 12
+    }
+  },
+  {
+    "eventTimestamp": "2016-10-04T11:56:24.332Z",
+    "eventType": "ActivityTaskCompleted",
+    "eventId": 20,
+    "activityTaskCompletedEventAttributes": {
+      "result": "{\"properties\":[\"http://schema.org/name\",\"http://schema.org/keywords\",\"http://schema.org/image\",\"http://schema.org/description\",\"http://schema.org/publisher\",\"http://schema.org/datePublished\",\"http://schema.org/articleSection#original\",\"http://ogp.me/ns#type\",\"http://schema.org/url\",\"http://prototyping.bbc.co.uk/ns#feedUrls\"]}",
+      "scheduledEventId": 11,
+      "startedEventId": 17
+    }
+  },
+  {
+    "eventTimestamp": "2016-10-04T11:56:24.332Z",
+    "eventType": "DecisionTaskScheduled",
+    "eventId": 21,
+    "decisionTaskScheduledEventAttributes": {
+      "taskList": {
+        "name": "ExtractMetadata"
+      },
+      "startToCloseTimeout": "30"
+    }
+  },
+  {
+    "eventTimestamp": "2016-10-04T11:56:24.624Z",
+    "eventType": "ActivityTaskCompleted",
+    "eventId": 22,
+    "activityTaskCompletedEventAttributes": {
+      "result": "{\"properties\":[\"http://prototyping.bbc.co.uk/ns#mobile_friendly\"]}",
+      "scheduledEventId": 13,
+      "startedEventId": 18
+    }
+  },
+  {
+    "eventTimestamp": "2016-10-04T11:56:24.634Z",
+    "eventType": "ActivityTaskCompleted",
+    "eventId": 23,
+    "activityTaskCompletedEventAttributes": {
+      "result": "{\"properties\":[\"http://schema.org/articleBody\",\"http://schema.org/text\"]}",
+      "scheduledEventId": 12,
+      "startedEventId": 19
+    }
+  },
+  {
+    "eventTimestamp": "2016-10-04T11:56:24.796Z",
+    "eventType": "ActivityTaskCompleted",
+    "eventId": 24,
+    "activityTaskCompletedEventAttributes": {
+      "result": "{\"properties\":[\"http://prototyping.bbc.co.uk/ns#favicons\"]}",
+      "scheduledEventId": 14,
+      "startedEventId": 16
+    }
+  },
+  {
+    "eventTimestamp": "2016-10-04T11:56:43.768Z",
+    "eventType": "TimerFired",
+    "eventId": 25,
+    "timerFiredEventAttributes": {
+      "timerId": "4fdb4007-2097-473b-98ea-c47443c75787",
+      "startedEventId": 15
+    }
+  },
+  {
+    "eventTimestamp": "2016-10-04T11:58:06.873Z",
+    "eventType": "DecisionTaskStarted",
+    "eventId": 26,
+    "decisionTaskStartedEventAttributes": {
+      "identity": "1b3cebb05884:1",
+      "scheduledEventId": 21
+    }
+  },
+  {
+    "eventTimestamp": "2016-10-04T11:58:07.098Z",
+    "eventType": "DecisionTaskCompleted",
+    "eventId": 27,
+    "decisionTaskCompletedEventAttributes": {
+      "scheduledEventId": 21,
+      "startedEventId": 26
+    }
+  },
+  {
+    "eventTimestamp": "2016-10-04T11:58:07.098Z",
+    "eventType": "ActivityTaskScheduled",
+    "eventId": 28,
+    "activityTaskScheduledEventAttributes": {
+      "activityType": {
+        "name": "SerializeMetadata",
+        "version": "20150107"
+      },
+      "activityId": "aad7550c-358f-45c0-83b0-65f162ad42ba",
+      "scheduleToStartTimeout": "NONE",
+      "scheduleToCloseTimeout": "NONE",
+      "startToCloseTimeout": "NONE",
+      "taskList": {
+        "name": "SerializeMetadata"
+      },
+      "decisionTaskCompletedEventId": 27,
+      "heartbeatTimeout": "NONE"
+    }
+  },
+  {
+    "eventTimestamp": "2016-10-04T11:58:07.098Z",
+    "eventType": "ActivityTaskScheduled",
+    "eventId": 29,
+    "activityTaskScheduledEventAttributes": {
+      "activityType": {
+        "name": "MediaCount",
+        "version": "20150108"
+      },
+      "activityId": "d478e622-58f3-4b86-869a-54fa9c62f8be",
+      "scheduleToStartTimeout": "NONE",
+      "scheduleToCloseTimeout": "NONE",
+      "startToCloseTimeout": "NONE",
+      "taskList": {
+        "name": "MediaCount"
+      },
+      "decisionTaskCompletedEventId": 27,
+      "heartbeatTimeout": "NONE"
+    }
+  },
+  {
+    "eventTimestamp": "2016-10-04T11:58:07.098Z",
+    "eventType": "ActivityTaskScheduled",
+    "eventId": 30,
+    "activityTaskScheduledEventAttributes": {
+      "activityType": {
+        "name": "Seriousness",
+        "version": "20150106"
+      },
+      "activityId": "c3caeca4-bd68-4ce5-899a-bde88121c9f8",
+      "scheduleToStartTimeout": "NONE",
+      "scheduleToCloseTimeout": "NONE",
+      "startToCloseTimeout": "NONE",
+      "taskList": {
+        "name": "Seriousness"
+      },
+      "decisionTaskCompletedEventId": 27,
+      "heartbeatTimeout": "NONE"
+    }
+  },
+  {
+    "eventTimestamp": "2016-10-04T11:58:07.098Z",
+    "eventType": "ActivityTaskScheduled",
+    "eventId": 31,
+    "activityTaskScheduledEventAttributes": {
+      "activityType": {
+        "name": "ReadingTime",
+        "version": "20150108"
+      },
+      "activityId": "a1daab43-ebf9-47bc-806a-164cc4f0215e",
+      "scheduleToStartTimeout": "NONE",
+      "scheduleToCloseTimeout": "NONE",
+      "startToCloseTimeout": "NONE",
+      "taskList": {
+        "name": "ReadingTime"
+      },
+      "decisionTaskCompletedEventId": 27,
+      "heartbeatTimeout": "NONE"
+    }
+  },
+  {
+    "eventTimestamp": "2016-10-04T11:58:07.098Z",
+    "eventType": "ActivityTaskScheduled",
+    "eventId": 32,
+    "activityTaskScheduledEventAttributes": {
+      "activityType": {
+        "name": "Mentions",
+        "version": "20150109"
+      },
+      "activityId": "abeb5872-adfa-44fc-baab-6325fab4947a",
+      "scheduleToStartTimeout": "NONE",
+      "scheduleToCloseTimeout": "NONE",
+      "startToCloseTimeout": "NONE",
+      "taskList": {
+        "name": "Mentions"
+      },
+      "decisionTaskCompletedEventId": 27,
+      "heartbeatTimeout": "NONE"
+    }
+  },
+  {
+    "eventTimestamp": "2016-10-04T11:58:07.098Z",
+    "eventType": "ActivityTaskScheduled",
+    "eventId": 33,
+    "activityTaskScheduledEventAttributes": {
+      "activityType": {
+        "name": "PronounCount",
+        "version": "20150113"
+      },
+      "activityId": "3498ee24-0f42-4603-af18-3cf0d5134794",
+      "scheduleToStartTimeout": "NONE",
+      "scheduleToCloseTimeout": "NONE",
+      "startToCloseTimeout": "NONE",
+      "taskList": {
+        "name": "PronounCount"
+      },
+      "decisionTaskCompletedEventId": 27,
+      "heartbeatTimeout": "NONE"
+    }
+  },
+  {
+    "eventTimestamp": "2016-10-04T11:58:07.098Z",
+    "eventType": "ActivityTaskScheduled",
+    "eventId": 34,
+    "activityTaskScheduledEventAttributes": {
+      "activityType": {
+        "name": "ReadingEase",
+        "version": "20150310"
+      },
+      "activityId": "16d252bf-2cfb-4ff3-a628-6792c368e071",
+      "scheduleToStartTimeout": "NONE",
+      "scheduleToCloseTimeout": "NONE",
+      "startToCloseTimeout": "NONE",
+      "taskList": {
+        "name": "ReadingEase"
+      },
+      "decisionTaskCompletedEventId": 27,
+      "heartbeatTimeout": "NONE"
+    }
+  },
+  {
+    "eventTimestamp": "2016-10-04T11:58:07.098Z",
+    "eventType": "ActivityTaskScheduled",
+    "eventId": 35,
+    "activityTaskScheduledEventAttributes": {
+      "activityType": {
+        "name": "Perspective",
+        "version": "20150310"
+      },
+      "activityId": "28280fb3-a3cc-489d-b9c1-7c8cd9ccbc62",
+      "scheduleToStartTimeout": "NONE",
+      "scheduleToCloseTimeout": "NONE",
+      "startToCloseTimeout": "NONE",
+      "taskList": {
+        "name": "Perspective"
+      },
+      "decisionTaskCompletedEventId": 27,
+      "heartbeatTimeout": "NONE"
+    }
+  },
+  {
+    "eventTimestamp": "2016-10-04T11:58:07.098Z",
+    "eventType": "ActivityTaskScheduled",
+    "eventId": 36,
+    "activityTaskScheduledEventAttributes": {
+      "activityType": {
+        "name": "Categories",
+        "version": "20150331"
+      },
+      "activityId": "a32f6bd7-b527-4755-ae1c-387b8f4df329",
+      "scheduleToStartTimeout": "NONE",
+      "scheduleToCloseTimeout": "NONE",
+      "startToCloseTimeout": "NONE",
+      "taskList": {
+        "name": "Categories"
+      },
+      "decisionTaskCompletedEventId": 27,
+      "heartbeatTimeout": "NONE"
+    }
+  },
+  {
+    "eventTimestamp": "2016-10-04T11:58:07.098Z",
+    "eventType": "ActivityTaskScheduled",
+    "eventId": 37,
+    "activityTaskScheduledEventAttributes": {
+      "activityType": {
+        "name": "Language",
+        "version": "20160105"
+      },
+      "activityId": "c8affca2-7734-4d26-a5c5-e9e5118b089f",
+      "scheduleToStartTimeout": "NONE",
+      "scheduleToCloseTimeout": "NONE",
+      "startToCloseTimeout": "NONE",
+      "taskList": {
+        "name": "Language"
+      },
+      "decisionTaskCompletedEventId": 27,
+      "heartbeatTimeout": "NONE"
+    }
+  },
+  {
+    "eventTimestamp": "2016-10-04T11:58:07.098Z",
+    "eventType": "ActivityTaskScheduled",
+    "eventId": 38,
+    "activityTaskScheduledEventAttributes": {
+      "activityType": {
+        "name": "Summariser",
+        "version": "20160218"
+      },
+      "activityId": "d7dd3b50-926d-4da6-b4f6-bc7119822e3c",
+      "scheduleToStartTimeout": "NONE",
+      "scheduleToCloseTimeout": "NONE",
+      "startToCloseTimeout": "NONE",
+      "taskList": {
+        "name": "Summariser"
+      },
+      "decisionTaskCompletedEventId": 27,
+      "heartbeatTimeout": "NONE"
+    }
+  },
+  {
+    "eventTimestamp": "2016-10-04T11:58:07.098Z",
+    "eventType": "TimerStarted",
+    "eventId": 39,
+    "timerStartedEventAttributes": {
+      "timerId": "8afc6be3-adbc-4eda-bb42-d0372d4c181d",
+      "control": "SerializeMetadata",
+      "startToFireTimeout": "20",
+      "decisionTaskCompletedEventId": 27
+    }
+  },
+  {
+    "eventTimestamp": "2016-10-04T11:58:07.155Z",
+    "eventType": "ActivityTaskStarted",
+    "eventId": 40,
+    "activityTaskStartedEventAttributes": {
+      "identity": "8d5c26388676:1",
+      "scheduledEventId": 36
+    }
+  },
+  {
+    "eventTimestamp": "2016-10-04T11:58:07.165Z",
+    "eventType": "ActivityTaskStarted",
+    "eventId": 41,
+    "activityTaskStartedEventAttributes": {
+      "identity": "336b7ab3c402:1",
+      "scheduledEventId": 35
+    }
+  },
+  {
+    "eventTimestamp": "2016-10-04T11:58:07.176Z",
+    "eventType": "ActivityTaskStarted",
+    "eventId": 42,
+    "activityTaskStartedEventAttributes": {
+      "identity": "9d638cbbcec6:1",
+      "scheduledEventId": 33
+    }
+  },
+  {
+    "eventTimestamp": "2016-10-04T11:58:07.185Z",
+    "eventType": "ActivityTaskStarted",
+    "eventId": 43,
+    "activityTaskStartedEventAttributes": {
+      "identity": "b6a1f49d1d44:1",
+      "scheduledEventId": 31
+    }
+  },
+  {
+    "eventTimestamp": "2016-10-04T11:58:07.199Z",
+    "eventType": "ActivityTaskStarted",
+    "eventId": 44,
+    "activityTaskStartedEventAttributes": {
+      "identity": "05d6d919ab87:1",
+      "scheduledEventId": 28
+    }
+  },
+  {
+    "eventTimestamp": "2016-10-04T11:58:07.211Z",
+    "eventType": "ActivityTaskStarted",
+    "eventId": 45,
+    "activityTaskStartedEventAttributes": {
+      "identity": "83a43ad5e136:1",
+      "scheduledEventId": 34
+    }
+  },
+  {
+    "eventTimestamp": "2016-10-04T11:58:07.220Z",
+    "eventType": "ActivityTaskStarted",
+    "eventId": 46,
+    "activityTaskStartedEventAttributes": {
+      "identity": "f9e31bd92508:1",
+      "scheduledEventId": 38
+    }
+  },
+  {
+    "eventTimestamp": "2016-10-04T11:58:07.230Z",
+    "eventType": "ActivityTaskStarted",
+    "eventId": 47,
+    "activityTaskStartedEventAttributes": {
+      "identity": "86055ea88abc:1",
+      "scheduledEventId": 29
+    }
+  },
+  {
+    "eventTimestamp": "2016-10-04T11:58:07.241Z",
+    "eventType": "ActivityTaskStarted",
+    "eventId": 48,
+    "activityTaskStartedEventAttributes": {
+      "identity": "a9da8304811c:1",
+      "scheduledEventId": 32
+    }
+  },
+  {
+    "eventTimestamp": "2016-10-04T11:58:07.250Z",
+    "eventType": "ActivityTaskStarted",
+    "eventId": 49,
+    "activityTaskStartedEventAttributes": {
+      "identity": "391d39f15245:1",
+      "scheduledEventId": 37
+    }
+  },
+  {
+    "eventTimestamp": "2016-10-04T11:58:07.315Z",
+    "eventType": "ActivityTaskCompleted",
+    "eventId": 50,
+    "activityTaskCompletedEventAttributes": {
+      "scheduledEventId": 28,
+      "startedEventId": 44
+    }
+  },
+  {
+    "eventTimestamp": "2016-10-04T11:58:07.315Z",
+    "eventType": "DecisionTaskScheduled",
+    "eventId": 51,
+    "decisionTaskScheduledEventAttributes": {
+      "taskList": {
+        "name": "ExtractMetadata"
+      },
+      "startToCloseTimeout": "30"
+    }
+  },
+  {
+    "eventTimestamp": "2016-10-04T11:58:07.374Z",
+    "eventType": "ActivityTaskCompleted",
+    "eventId": 52,
+    "activityTaskCompletedEventAttributes": {
+      "result": "{\"properties\":[\"http://prototyping.bbc.co.uk/ns#readingease\"]}",
+      "scheduledEventId": 34,
+      "startedEventId": 45
+    }
+  },
+  {
+    "eventTimestamp": "2016-10-04T11:58:07.496Z",
+    "eventType": "ActivityTaskCompleted",
+    "eventId": 53,
+    "activityTaskCompletedEventAttributes": {
+      "result": "{\"properties\":[\"http://schema.org/timeRequired\",\"http://prototyping.bbc.co.uk/ns#time_required_seconds\"]}",
+      "scheduledEventId": 31,
+      "startedEventId": 43
+    }
+  },
+  {
+    "eventTimestamp": "2016-10-04T11:58:07.661Z",
+    "eventType": "ActivityTaskCompleted",
+    "eventId": 54,
+    "activityTaskCompletedEventAttributes": {
+      "result": "{\"properties\":[\"http://prototyping.bbc.co.uk/ns#pronoun_count\",\"http://prototyping.bbc.co.uk/ns#pronoun_gender_scale\"]}",
+      "scheduledEventId": 33,
+      "startedEventId": 42
+    }
+  },
+  {
+    "eventTimestamp": "2016-10-04T11:58:07.728Z",
+    "eventType": "ActivityTaskCompleted",
+    "eventId": 55,
+    "activityTaskCompletedEventAttributes": {
+      "result": "{\"properties\":[\"http://prototyping.bbc.co.uk/ns#sentiment:std\",\"http://prototyping.bbc.co.uk/ns#sentiment:std-polarity\",\"http://prototyping.bbc.co.uk/ns#sentiment\",\"http://prototyping.bbc.co.uk/ns#sentiment:extremes\",\"http://prototyping.bbc.co.uk/ns#sentiment:distribution\",\"http://prototyping.bbc.co.uk/ns#sentiment:averages-polarity\",\"http://prototyping.bbc.co.uk/ns#subjectivity\"]}",
+      "scheduledEventId": 35,
+      "startedEventId": 41
+    }
+  },
+  {
+    "eventTimestamp": "2016-10-04T11:58:07.769Z",
+    "eventType": "ActivityTaskCompleted",
+    "eventId": 56,
+    "activityTaskCompletedEventAttributes": {
+      "result": "{\"properties\":[\"http://example.org/audioObjectCount\",\"http://prototyping.bbc.co.uk/ns#image_object_count\",\"http://example.org/videoObjectCount\"]}",
+      "scheduledEventId": 29,
+      "startedEventId": 47
+    }
+  },
+  {
+    "eventTimestamp": "2016-10-04T11:58:07.931Z",
+    "eventType": "ActivityTaskCompleted",
+    "eventId": 57,
+    "activityTaskCompletedEventAttributes": {
+      "result": "{\"properties\":[\"http://prototyping.bbc.co.uk/ns#category\",\"http://schema.org/articleSection\"]}",
+      "scheduledEventId": 36,
+      "startedEventId": 40
+    }
+  },
+  {
+    "eventTimestamp": "2016-10-04T11:58:08.755Z",
+    "eventType": "ActivityTaskCompleted",
+    "eventId": 58,
+    "activityTaskCompletedEventAttributes": {
+      "result": "{\"properties\":[\"http://prototyping.bbc.co.uk/ns#summary\",\"http://prototyping.bbc.co.uk/ns#keywords\"]}",
+      "scheduledEventId": 38,
+      "startedEventId": 46
+    }
+  },
+  {
+    "eventTimestamp": "2016-10-04T11:58:09.358Z",
+    "eventType": "ActivityTaskCompleted",
+    "eventId": 59,
+    "activityTaskCompletedEventAttributes": {
+      "result": "{\"properties\":[\"http://prototyping.bbc.co.uk/ns#language:probability\",\"http://prototyping.bbc.co.uk/ns#language\"]}",
+      "scheduledEventId": 37,
+      "startedEventId": 49
+    }
+  },
+  {
+    "eventTimestamp": "2016-10-04T11:58:10.731Z",
+    "eventType": "ActivityTaskCompleted",
+    "eventId": 60,
+    "activityTaskCompletedEventAttributes": {
+      "result": "{\"properties\":[\"http://schema.org/mentions\",\"http://prototyping.bbc.co.uk/ns#mentions\",\"http://schema.org/Organization\",\"http://schema.org/Place\",\"http://schema.org/Person\",\"http://www.bbc.co.uk/ontologies/coreconcepts/Thing\"]}",
+      "scheduledEventId": 32,
+      "startedEventId": 48
+    }
+  },
+  {
+    "eventTimestamp": "2016-10-04T11:58:16.508Z",
+    "eventType": "ActivityTaskStarted",
+    "eventId": 61,
+    "activityTaskStartedEventAttributes": {
+      "identity": "0816801be62e:1",
+      "scheduledEventId": 30
+    }
+  },
+  {
+    "eventTimestamp": "2016-10-04T11:58:17.414Z",
+    "eventType": "ActivityTaskCompleted",
+    "eventId": 62,
+    "activityTaskCompletedEventAttributes": {
+      "result": "{\"properties\":[\"http://prototyping.bbc.co.uk/ns#lightness\",\"http://prototyping.bbc.co.uk/ns#seriousness\"]}",
+      "scheduledEventId": 30,
+      "startedEventId": 61
+    }
+  }
+]

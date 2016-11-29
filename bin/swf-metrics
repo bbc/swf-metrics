@@ -1,0 +1,50 @@
+#!/usr/bin/env node
+const { join } = require('path');
+const yargs = require('yargs');
+
+yargs
+  .usage('$0 <command> --domain <domain> [options]')
+  .env('SWF_METRICS')
+  .option('domain', {
+    global: true,
+    type: 'string',
+    demand: true,
+    describe: 'SWF domain to get metrics from',
+  })
+  .option('duration', {
+    global: true,
+    type: 'string',
+    describe: 'Duration of time of data to retrieve since the value of --since. Eg: 6hours, 1day, etc.',
+    default: [1, 'hour'],
+  })
+  .option('workflow-id', {
+    global: true,
+    type: 'string',
+    describe: 'Retrieve metrics only for this workflow execution.',
+  })
+  .option('time-threshold', {
+    global: true,
+    type: 'number',
+    describe: 'Hide cell values below this threshold (in seconds).',
+    default: 1,
+  })
+  .option('since', {
+    global: true,
+    type: 'string',
+    describe: 'Position in time from which we start retrieving the history of data.',
+  })
+  .coerce({
+    since: input => new Date(input || Date.now()).toISOString(),
+    duration: input => {
+      const [, digit, unit] = String(input || '').match(/(\d+)[\W\s]*([a-z]+)/i);
+      return [digit, unit];
+    },
+  })
+  .command('failed [--no-breakdown]', 'Display metrics about failed workflows.')
+  .command('pending', 'Display metrics about pending workflows.')
+  .command('completed', 'Display metrics about completed workflows.')
+  .commandDir(join(__dirname, '..', 'lib', 'cli'))
+  .help()
+  .version()
+  .strict()
+  .argv;
