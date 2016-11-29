@@ -2,6 +2,31 @@
 
 > Introspective metrics and breakdowns of pending and finished AWS Simple Workflow executions.
 
+# Installation
+
+## Install locally
+```
+$ npm install
+```
+
+## Run with Docker
+Ensure the following environment variables are set:
+
+* AWS_DEFAULT_REGION
+* AWS_ACCESS_KEY_ID
+* AWS_SECRET_ACCESS_KEY
+
+```
+$ docker build -t swf-metrics .
+
+$ docker run --rm -it \
+    --name swf-metrics \
+    -e AWS_DEFAULT_REGION=$AWS_DEFAULT_REGION \
+    -e AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID \
+    -e AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY \
+    swf-metrics
+```
+
 # Use
 
 ```bash
