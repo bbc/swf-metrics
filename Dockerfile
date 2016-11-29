@@ -1,11 +1,9 @@
-FROM bbcrd/node:6.x
+FROM node:6-alpine
 
-USER app
 WORKDIR /app
 
-COPY . /app
+COPY . ./
 
 RUN npm install --production
 
 ENTRYPOINT ["/app/bin/swf-metrics"]
-
