@@ -1,6 +1,6 @@
 {
   "name": "swf-metrics",
-  "version": "1.0.0-beta.2",
+  "version": "1.0.0",
   "description": "Introspective metrics and breakdowns of pending and finished AWS Simple Workflow executions.",
   "main": "index.js",
   "bin": "bin/swf-metrics",
