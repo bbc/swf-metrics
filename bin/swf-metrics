@@ -20,26 +20,25 @@ yargs
   .option('workflow-id', {
     global: true,
     type: 'string',
-    describe: 'Retrieve the metrics only for a given workflow.',
+    describe: 'Retrieve metrics only for this workflow execution.',
   })
   .option('time-threshold', {
     global: true,
     type: 'number',
-    describe: 'Hide time measures which value is below this number of seconds.',
-    default: 1
+    describe: 'Hide cell values below this threshold (in seconds).',
+    default: 1,
   })
   .option('since', {
     global: true,
     type: 'string',
     describe: 'Position in time from which we start retrieving the history of data.',
-    default: new Date,
   })
   .coerce({
-    since: input => new Date(input).toISOString(),
+    since: input => new Date(input || Date.now()).toISOString(),
     duration: input => {
-      const [, digit, unit] = input.match(/(\d+)[\W\s]*([a-z]+)/i);
+      const [, digit, unit] = String(input || '').match(/(\d+)[\W\s]*([a-z]+)/i);
       return [digit, unit];
-    }
+    },
   })
   .command('failed [--no-breakdown]', 'Display metrics about failed workflows.')
   .command('pending', 'Display metrics about pending workflows.')
